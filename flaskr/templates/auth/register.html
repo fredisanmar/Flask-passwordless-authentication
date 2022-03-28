@@ -1,0 +1,57 @@
+{% extends "bootstrap/base.html" %}
+{% block content %}
+
+<nav class="navbar navbar-inverse">
+    {% if session['logged_in'] %}
+    <ul class="nav navbar-nav navbar-left">
+        <li><a href="{{ url_for('manage.add') }}"><span class="glyphicon glyphicon-plus"></span>Add Student
+                Data</a></li>
+        <li><a href="{{ url_for('manage.view') }}"><span class="glyphicon glyphicon-search"></span>View Student
+                Data</a></li>
+        <li><a href="{{ url_for('auth.logout') }}"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+        {% else %}
+        <ul class="nav navbar-nav navbar-right">
+            <li class="active"><a href="{{ url_for('auth.register') }}"><span class="glyphicon glyphicon-user"></span>
+                    Sign Up</a></li>
+            <li><a href="{{ url_for('auth.login') }}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        </ul>
+        {% endif %}
+        <div class="container">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category }}" role="alert">
+                {{ message }}
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+        </div>
+</nav>
+<div class="container">
+    <form action="{{ url_for('auth.register') }}" method="post">
+        <h5>Instructions!</h5>
+        <ul>
+            <li>Download <a
+                    href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=en&gl=US"
+                    target="_blank">Google Authenticator</a> on your mobile.</li>
+            <li>Create a new account with <strong>setup key</strong> method.</li>
+            <li>Provide the required details (name, secret key).</li>
+            <li>Select time-based authentication.</li>
+            <li>Submit the generated key in the form.</li>
+        </ul>
+        <div class="form-group">
+            <label for="username"><b>Username</b></label>
+            <input type="text" class="form-control" name="username" id="username" required><br>
+            <label for="secret">Secret Token</label>
+            <input type="text" class="form-control" id="secret" value="{{ secret }}" readonly>
+        </div>
+        <div class="text-center">
+            <input type="submit" class="btn btn-primary" value="Register">
+        </div>
+    </form>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}

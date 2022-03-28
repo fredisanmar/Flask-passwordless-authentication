@@ -1,0 +1,47 @@
+{% extends "bootstrap/base.html" %}
+{% block content %}
+<nav class="navbar navbar-inverse">
+    {% if session['logged_in'] %}
+    <ul class="nav navbar-nav navbar-left">
+        <li class="active"><a href="{{ url_for('manage.add') }}"><span class="glyphicon glyphicon-plus"></span>Add Student
+                Data</a></li>
+        <li><a href="{{ url_for('manage.view') }}"><span class="glyphicon glyphicon-search"></span>View Student
+                Data</a></li>
+        <li><a href="{{ url_for('auth.logout') }}"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+        {% else %}
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="{{ url_for('auth.register') }}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+            <li><a href="{{ url_for('auth.login') }}"><span class="glyphicon glyphicon-log-in"></span>
+                    Login</a></li>
+        </ul>
+        {% endif %}
+        <div class="container">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category }}" role="alert">
+                {{ message }}
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+        </div>
+</nav>
+<div class="container">
+    <form method="POST">
+        <div class="form-group">
+            <label for="Name"><b>Name</b></label>
+            <input type="text" class="form-control" name="Name" id="Name" required><br>
+            <label for="Surname"><b>Surname</b></label>
+            <input type="text" class="form-control" name="Surname" id="Surname" required><br>
+            <label for="Birth"><b>Date Of Birth</b></label>
+            <input type="date" class="form-control" name="Birth" id="Birth" required><br>
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Create New Student Record</button>
+        </div>
+    </form>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}

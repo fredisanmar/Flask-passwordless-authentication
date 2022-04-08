@@ -3,15 +3,16 @@
 <nav class="navbar navbar-inverse">
     {% if session['logged_in'] %}
     <ul class="nav navbar-nav navbar-left">
-        <li class="active"><a href="{{ url_for('manage.add') }}"><span class="glyphicon glyphicon-plus"></span>Add Student
+        <li><a href="{{ url_for('manage.add') }}"><span class="glyphicon glyphicon-plus"></span>Add Student
                 Data</a></li>
-        <li><a href="{{ url_for('manage.view') }}"><span class="glyphicon glyphicon-search"></span>View Student
+        <li class="active"><a href="{{ url_for('manage.view') }}"><span class="glyphicon glyphicon-search"></span>View Student
                 Data</a></li>
         <li><a href="{{ url_for('auth.logout') }}"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
         {% else %}
         <ul class="nav navbar-nav navbar-right">
             <li><a href="{{ url_for('auth.register') }}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-            <li><a href="{{ url_for('auth.login') }}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            <li><a href="{{ url_for('auth.login') }}"><span class="glyphicon glyphicon-log-in"></span>
+                    Login</a></li>
         </ul>
         {% endif %}
 </nav>
@@ -33,20 +34,24 @@
 <div class="container">
     <form method="POST">
         <div class="form-group">
-            <label for="Name"><b>Name</b></label>
-            <input type="text" class="form-control" name="Name" id="Name" required><br>
-            <label for="Surname"><b>Surname</b></label>
-            <input type="text" class="form-control" name="Surname" id="Surname" required><br>
             <label for="NIN"><b>National Identification Number</b></label>
             <input type="text" class="form-control" name="NIN" id="Nin" required><br>
-            <label for="Birth"><b>Date Of Birth</b></label>
-            <input type="date" class="form-control" name="Birth" id="Birth" required><br>
-            <label for="cred"><b>Encryption key</b></label>
-            <input type="text" class="form-control" id="cred" value="{{ cred }}" readonly><br>
+            <label for="Credential"><b>Credential</b></label>
+            <input type="text" class="form-control" name="Credential" id="Credential" required><br>
             <div class="text-center">
-                <button type="submit" class="btn btn-primary">Create New Student Record</button>
+                <button type="submit" class="btn btn-primary">View Student Record</button>
             </div>
     </form>
+    {% if record %}
+    <div class="records">
+        <p>N.I.N: {{ record.NIN }}</p>
+        <p>Name: {{ record.Name }}</p>
+        <p>Surname: {{ record.Surname }}</p>
+        <p>Date of Birth: {{ record.Birth }}</p>
+        <p>StudentID: {{ record.StudentID }}</p>
+    </div>
+    {% endif %}
+    <hr>
 </div>
 </div>
 </div>

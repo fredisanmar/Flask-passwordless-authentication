@@ -17,7 +17,7 @@ def create_app(test_config=None):
     app.config['MYSQL_HOST'] = 'writ1.cqtsozzwj3vt.eu-west-2.rds.amazonaws.com'
     app.config['MYSQL_PORT'] = 3306
     app.config['MYSQL_USER'] = 'admin'
-    app.config['MYSQL_PASSWORD'] = 'Secret_password'
+    app.config['MYSQL_PASSWORD'] = 'FeCDv7szQ4WKpG'
     app.config['MYSQL_DB'] = 'APK_Uni'
     #set gobal mysql to be accesible from everywhere
     global mysql
